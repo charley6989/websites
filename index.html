@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Тест реакции</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">Тест&nbsp;реакции</h1>
+    <div class="header-actions">
+      <div class="best-pill" title="Лучший результат">Рекорд: <b id="best-score">0</b></div>
+      <button id="mute-btn" class="btn btn-ghost btn-icon" type="button" aria-label="Звук" title="Звук вкл/выкл">🔊</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="game-card">
+      <!-- Панель показателей -->
+      <div class="hud">
+        <div class="hud-item"><span class="hud-label">Очки</span><span class="hud-value" id="hud-score">0</span></div>
+        <div class="hud-item"><span class="hud-label">Уровень</span><span class="hud-value" id="hud-level">1</span></div>
+        <div class="hud-item"><span class="hud-label">Последняя</span><span class="hud-value" id="hud-last">—</span></div>
+        <div class="hud-item"><span class="hud-label">Средняя</span><span class="hud-value" id="hud-avg">—</span></div>
+        <button id="pause-btn" class="btn btn-ghost btn-icon" type="button" aria-label="Пауза" title="Пауза (Esc)">⏸</button>
+      </div>
+
+      <!-- Игровое поле -->
+      <div class="field" id="field">
+        <div class="overlay" id="overlay" hidden>
+          <!-- Меню -->
+          <div class="panel" id="panel-menu">
+            <h2>Проверь реакцию</h2>
+            <p class="panel-text">
+              Появляется точка — жми её как можно быстрее.<br>
+              Каждая следующая точка <b>появляется раньше</b> и <b>исчезает быстрее</b> предыдущей.
+            </p>
+            <p class="panel-hint">Промедлил — игра окончена. Esc — пауза, пробел — старт.</p>
+            <button class="btn btn-primary" id="start-btn" type="button">Начать игру</button>
+          </div>
+
+          <!-- Отсчёт -->
+          <div class="panel panel-plain" id="panel-count" hidden>
+            <div class="count-num" id="count-num">3</div>
+          </div>
+
+          <!-- Пауза -->
+          <div class="panel" id="panel-pause" hidden>
+            <h2>Пауза</h2>
+            <div class="btn-row">
+              <button class="btn btn-primary" id="resume-btn" type="button">Продолжить</button>
+              <button class="btn btn-ghost" id="restart-btn" type="button">Заново</button>
+              <button class="btn btn-ghost" id="menu-btn" type="button">В меню</button>
+            </div>
+          </div>
+
+          <!-- Итоги -->
+          <div class="panel" id="panel-over" hidden>
+            <h2 id="over-title">Игра окончена</h2>
+            <div class="record-flag" id="record-flag" hidden></div>
+            <div class="over-stats">
+              <div><span>Тычков</span><b id="over-score">0</b></div>
+              <div><span>Уровень</span><b id="over-level">1</b></div>
+              <div><span>Средняя реакция</span><b id="over-avg">—</b></div>
+              <div><span>Лучшая реакция</span><b id="over-best">—</b></div>
+            </div>
+            <div class="btn-row">
+              <button class="btn btn-primary" id="again-btn" type="button">Ещё раз</button>
+              <button class="btn btn-ghost" id="menu-btn-2" type="button">В меню</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Таблица лучших результатов (localStorage, без базы) -->
+    <section class="records">
+      <div class="records-head">
+        <h2>Лучшие результаты</h2>
+        <button id="clear-btn" class="btn btn-ghost btn-small" type="button">Очистить</button>
+      </div>
+      <table class="records-table">
+        <thead>
+          <tr><th>#</th><th>Дата</th><th>Очки</th><th>Уровень</th><th>Ср. мс</th><th>Лучшая мс</th></tr>
+        </thead>
+        <tbody id="records-body"></tbody>
+      </table>
+      <p class="records-note" id="records-note" hidden>Пока нет результатов — сыграйте партию.</p>
+    </section>
+  </main>
+
+  <footer class="footer">Всё хранится локально в браузере (localStorage), без базы данных.</footer>
+
+  <script src="game.js"></script>
+</body>
+</html>
